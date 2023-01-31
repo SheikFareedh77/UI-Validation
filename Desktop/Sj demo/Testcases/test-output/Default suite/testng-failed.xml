@@ -5,6 +5,7 @@
     <classes>
       <class name="UItestingvalidation.Validtestcases">
         <methods>
+          <include name="executeinvalidtestcase"/>
           <include name="executevalidtestcase"/>
         </methods>
       </class> <!-- UItestingvalidation.Validtestcases -->

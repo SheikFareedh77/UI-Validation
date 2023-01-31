@@ -8,7 +8,6 @@ import java.util.List;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -16,14 +15,18 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
 public class Validtestcases {
-	int n = 1, actual = 1;
-	WebDriver driver = Definitionclass.definebrowser("chrome");
-	String Errorcode = "404";
-	Datafeed login = PageFactory.initElements(driver, Datafeed.class);
+	int n = Globalvariabletestcase.n;
+	int actual = Globalvariabletestcase.actual;
+	WebDriver driver = Globalvariabletestcase.driver;
+	String Errormessage = Globalvariabletestcase.Errormessage;
+	Datafeed login = Globalvariabletestcase.login;
+	JavascriptExecutor js = Globalvariabletestcase.js;
 
 	@Test(priority = 1)
 	public void executevalidtestcase()
 			throws InterruptedException, IOException, ParseException, CsvValidationException {
+
+		Globalvariabletestcase.driver = driver;
 		driver.manage().window().maximize();
 		driver.get("https://www.ip2location.com");
 		login.cookiebutton.click();
@@ -54,12 +57,11 @@ public class Validtestcases {
 			Assert.assertEquals(n, validate);
 			Thread.sleep(3000);
 			login.Lookup.click();
-			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollTo(0,400)");
 			Thread.sleep(3000);
 			login.Trydemotextbox.clear();
 			int n1 = Validateeachvalue.lookupvalidate(driver, l.get(2), l.get(3), l.get(4), login);
-			Assert.assertEquals(n1, actual);
+			Assert.assertEquals(n1, Globalvariabletestcase.actual);
 
 		}
 	}
@@ -68,7 +70,7 @@ public class Validtestcases {
 	public void executeinvalidtestcase() throws InterruptedException, CsvValidationException, IOException {
 		driver.manage().window().maximize();
 		driver.get("https://www.ip2location.com");
-		login.cookiebutton.click();
+		// login.cookiebutton.click();
 		String title = driver.getTitle().toString();
 		System.out.println(title);
 		Assert.assertEquals("IP Address to IP Location and Proxy Information | IP2Location", title);
@@ -89,10 +91,10 @@ public class Validtestcases {
 			login.Trydemotextbox.sendKeys(l.get(0));
 			Thread.sleep(3000);
 			login.Lookup.click();
-			JavascriptExecutor js = (JavascriptExecutor) driver;
+
 			js.executeScript("window.scrollTo(0,400)");
 			Thread.sleep(3000);
-			Assert.assertEquals(login.errorcode.getText(), Errorcode);
+			Assert.assertEquals(login.errormessage.getText(), Errormessage);
 			login.Trydemotextbox.clear();
 		}
 	}

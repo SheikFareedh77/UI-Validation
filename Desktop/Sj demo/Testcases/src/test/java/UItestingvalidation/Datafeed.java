@@ -31,8 +31,8 @@ public class Datafeed {
 	WebElement region;
 	@FindBy(xpath = "/html/body/div[2]/div/div[2]/div[2]/div[3]/table/tbody/tr[5]/td")
 	WebElement city;
-	@FindBy(xpath = "/html/body/main/div/div/div/div/span")
-	WebElement errorcode;
-	@FindBy(xpath = "\"/html/body/main/div/div/div/div/p\"")
+	// @FindBy(xpath = "/html/body/main/div/div/div/div/span")
+	// WebElement errorcode;
+	@FindBy(xpath = "/html/body/div[2]/div/div[1]/div[1]/form/div[2]")
 	WebElement errormessage;
 }
